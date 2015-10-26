@@ -19,13 +19,14 @@ class EndpointsAsyncTask extends AsyncTask<Void, Void, Joke> {
     public interface EndpointsAsyncTaskListener {
         void onJoke(Joke joke);
     }
+
     public EndpointsAsyncTask(EndpointsAsyncTaskListener listener) {
         this.listner = listener;
     }
 
     @Override
     protected Joke doInBackground(Void... params) {
-        if(myApiService == null) {  // Only do this once
+        if (myApiService == null) {  // Only do this once
             JokeApi.Builder builder = new JokeApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                     // options for running against local devappserver
@@ -45,17 +46,16 @@ class EndpointsAsyncTask extends AsyncTask<Void, Void, Joke> {
 
         try {
             com.teddydoll.jokes.backend.jokeApi.model.Joke joke =
-                myApiService.getJoke().execute();
-            return new Joke(joke.getJoke(), joke.getAnswer());
+                    myApiService.getJoke().execute();
+            return joke != null ? new Joke(joke.getJoke(), joke.getAnswer()) : null;
         } catch (IOException e) {
             return null;
         }
     }
 
 
-
     @Override
     protected void onPostExecute(Joke result) {
-        if(listner != null) listner.onJoke(result);
+        if (listner != null) listner.onJoke(result);
     }
 }

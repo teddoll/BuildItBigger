@@ -1,5 +1,7 @@
 package com.joke;
 
+import java.util.Random;
+
 /**
  * A class that providers jokes.
  */
@@ -18,6 +20,6 @@ public class Joker {
      * @return a joke
      */
     public Joke getJoke(){
-        return null;//jokes[new Random().nextInt(jokes.length)];
+        return jokes[new Random().nextInt(jokes.length)];
     }
 }

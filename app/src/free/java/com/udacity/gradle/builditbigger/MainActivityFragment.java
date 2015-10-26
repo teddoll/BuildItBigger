@@ -50,6 +50,12 @@ public class MainActivityFragment extends MainActivityBaseFragment {
 
     @Override
     protected void loadJoke(Joke joke) {
+        //do not display ad if joke is null.
+        if(joke == null) {
+            super.loadJoke(null);
+            return;
+        }
+
         pendingJoke = joke;
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
