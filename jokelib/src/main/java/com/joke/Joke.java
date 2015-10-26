@@ -1,7 +1,9 @@
 package com.joke;
 
 /**
+ * a Joke class that contains a joke and punchline.
  * Created by teddydoll on 10/23/15.
+ *
  */
 public class Joke {
 
